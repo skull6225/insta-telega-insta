@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,14 @@ public class BotProperties {
     
 	private String token;
 	private String username;
+	private String chatId;
 	
 	private Creator creator;
-	private Session session;
+	
+	private Api api;
+	private Path path;
 
+	
 	@Setter
 	@Getter
 	@NoArgsConstructor
@@ -30,9 +34,17 @@ public class BotProperties {
 	@Setter
 	@Getter
 	@NoArgsConstructor
-	@ConfigurationProperties("session")
-	public static class Session {
-		private Integer minutes;
+	@ConfigurationProperties("api")
+	public static class Api {
+		private String uri;
+	}
+	
+	@Setter
+	@Getter
+	@NoArgsConstructor
+	@ConfigurationProperties("path")
+	public static class Path {
+		private String byDefault;
 	}
 	
 }

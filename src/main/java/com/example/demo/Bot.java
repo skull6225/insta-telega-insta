@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.net.URISyntaxException;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,9 @@ import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import com.example.demo.config.properties.BotProperties;
+import com.example.demo.handler.ResponseHandler;
 
 @Component
 public class Bot extends AbilityBot {
@@ -26,14 +28,7 @@ public class Bot extends AbilityBot {
 	}
 
 	public Reply replyToMessage() {
-		Consumer<Update> action = upd -> {
-			try {
-				responseHandler.replyToMessage(upd);
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		};
+		Consumer<Update> action = upd -> responseHandler.replyToMessage(upd);
 		return Reply.of(action, Flag.MESSAGE);
 	}
 	
